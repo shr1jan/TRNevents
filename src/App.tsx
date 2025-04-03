@@ -360,7 +360,7 @@ function AppContent() {
 
             
       {/* Search Section */}
-      <div className="bg-white py-8 shadow-sm sticky top-16 z-30">
+      <div className="bg-[#111827] py-8 shadow-sm sticky top-16 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-stretch gap-4">
             <div className="flex-1 relative">
@@ -409,7 +409,7 @@ function AppContent() {
           </div>
           {activeFilter !== 'all' && (
             <div className="mt-3 flex items-center">
-              <span className="text-sm text-gray-600 mr-2">Active filter:</span>
+              <span className="text-sm text-gray-300 mr-2">Active filter:</span>
               <span className="bg-indigo-100 text-indigo-800 text-sm px-3 py-1 rounded-full flex items-center">
                 {activeFilter}
                 <button 
@@ -426,15 +426,15 @@ function AppContent() {
       </div>
 
       {/* Events Carousel */}
-      <div id="events" className="py-16 bg-gray-50">
+      <div id="events" className="py-16 bg-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {networkError ? (
             <div className="text-center py-12">
               <div className="inline-block p-4 rounded-full bg-red-100 mb-4">
                 <X className="h-8 w-8 text-red-500" />
               </div>
-              <h3 className="text-xl font-medium text-gray-700">Connection Error</h3>
-              <p className="text-gray-500 mt-2">{networkError}</p>
+              <h3 className="text-xl font-medium text-gray-200">Connection Error</h3>
+              <p className="text-gray-300 mt-2">{networkError}</p>
               <button 
                 onClick={() => window.location.reload()}
                 className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-colors"
@@ -446,14 +446,14 @@ function AppContent() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1, 2, 3].map((item) => (
                 <div key={item} className="animate-pulse space-y-4">
-                  <div className="h-48 bg-gray-200 rounded-lg"></div>
-                  <div className="h-6 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-full"></div>
+                  <div className="h-48 bg-gray-700 rounded-lg"></div>
+                  <div className="h-6 bg-gray-700 rounded w-3/4"></div>
+                  <div className="h-4 bg-gray-700 rounded w-full"></div>
                   <div className="space-y-2">
-                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                    <div className="h-4 bg-gray-700 rounded w-1/2"></div>
+                    <div className="h-4 bg-gray-700 rounded w-2/3"></div>
                   </div>
-                  <div className="h-10 bg-gray-200 rounded-full w-full"></div>
+                  <div className="h-10 bg-gray-700 rounded-full w-full"></div>
                 </div>
               ))}
             </div>
@@ -558,15 +558,15 @@ function AppContent() {
       </div>
 
       {/* About Section */}
-      <div id="about" className="py-16 bg-white">
+      <div id="about" className="py-16 bg-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-x-8">
             <div>
-              <h2 className="text-3xl font-bold mb-6">About TRN Events</h2>
-              <p className="text-gray-600 mb-4">
+              <h2 className="text-3xl font-bold mb-6 text-white">About TRN Events</h2>
+              <p className="text-gray-300 mb-4">
                 TRN Events is Nepal's premier ticket marketplace for live events. We provide fans with a safe and reliable place to get tickets to the events they want to see, and an easy way for sellers to get their tickets in front of a large audience.
               </p>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-300 mb-6">
                 Our mission is to connect fans with the power of live events. We believe that sharing experiences is what brings people together, creating lifelong memories and nurturing our cultural spirit.
               </p>
             </div>
@@ -579,31 +579,31 @@ function AppContent() {
                 />
               </div>
               <div className="mt-8">
-                <h3 className="text-xl font-bold mb-4">Our Guarantee</h3>
+                <h3 className="text-xl font-bold mb-4 text-white">Our Guarantee</h3>
                 <div className="space-y-4">
                   <div className="flex items-start">
-                    <Shield className="h-6 w-6 text-indigo-600 mr-3 mt-1 flex-shrink-0" />
+                    <Shield className="h-6 w-6 text-indigo-400 mr-3 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="font-medium">100% Authentic Tickets</h4>
-                      <p className="text-gray-600 text-sm mt-1">
+                      <h4 className="font-medium text-white">100% Authentic Tickets</h4>
+                      <p className="text-gray-300 text-sm mt-1">
                         Every ticket sold on our platform is 100% verified and guaranteed to be authentic.
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <CreditCard className="h-6 w-6 text-indigo-600 mr-3 mt-1 flex-shrink-0" />
+                    <CreditCard className="h-6 w-6 text-indigo-400 mr-3 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="font-medium">Secure Transactions</h4>
-                      <p className="text-gray-600 text-sm mt-1">
+                      <h4 className="font-medium text-white">Secure Transactions</h4>
+                      <p className="text-gray-300 text-sm mt-1">
                         Your payment information is always protected with industry-leading encryption.
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <Star className="h-6 w-6 text-indigo-600 mr-3 mt-1 flex-shrink-0" />
+                    <Star className="h-6 w-6 text-indigo-400 mr-3 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="font-medium">Premium Experience</h4>
-                      <p className="text-gray-600 text-sm mt-1">
+                      <h4 className="font-medium text-white">Premium Experience</h4>
+                      <p className="text-gray-300 text-sm mt-1">
                         From purchase to event day, we ensure a smooth and enjoyable experience.
                       </p>
                     </div>
