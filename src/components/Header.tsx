@@ -56,7 +56,11 @@ const Header = ({ user, signOut, setShowAuth }: HeaderProps) => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <span className="ml-2 text-indigo-600 text-xl font-bold">TRN EVENTS</span>
+            <img 
+              src="src\assets\trn.png" 
+              alt="TRN EVENTS" 
+              className="h-20 w-auto"
+            />
           </div>
           
           {/* Desktop Navigation */}
