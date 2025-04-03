@@ -9,6 +9,7 @@ import Header from './components/Header';
 import { useAuth } from './hooks/useAuth';
 import { useEvents } from './hooks/useEvents';
 import TicketPurchase from './components/TicketPurchase';
+import Tickets from './pages/Tickets';
 
 type UserWithProfile = {
   email: string | null;
