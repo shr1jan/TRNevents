@@ -368,7 +368,7 @@ function AppContent() {
               <input
                 type="text"
                 placeholder="Search events, artists, or venues..."
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 bg-[#111827] border border-gray-500 text-white placeholder-gray-400 rounded-full focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => {
@@ -493,7 +493,7 @@ function AppContent() {
                     >
                       <div 
                         onClick={() => handleTicketPurchase(event.id)}
-                        className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                        className="bg-[#111827] border border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:bg-[#1a2438] transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
                       >
                         <div className="relative">
                           <img 
@@ -507,8 +507,8 @@ function AppContent() {
                           </div>
                         </div>
                         <div className="p-4">
-                          <h3 className="text-xl font-bold mb-2">{event.artist}</h3>
-                          <div className="space-y-2 text-gray-600 text-sm mb-4">
+                          <h3 className="text-xl font-bold mb-2 text-white">{event.artist}</h3>
+                          <div className="space-y-2 text-gray-400 text-sm mb-4">
                             <div className="flex items-center">
                               <Calendar className="h-4 w-4 mr-2" />
                               {event.date}
@@ -530,8 +530,8 @@ function AppContent() {
                               }}
                               className={`p-2 rounded-full ${
                                 favorites.includes(event.id)
-                                  ? 'text-red-500 bg-red-50'
-                                  : 'text-gray-400 hover:text-red-500 hover:bg-red-50'
+                                  ? 'text-red-500 bg-red-50/10'
+                                  : 'text-gray-400 hover:text-red-500 hover:bg-red-50/10'
                               } transition-colors`}
                             >
                               <Heart className={`h-5 w-5 ${favorites.includes(event.id) ? 'fill-current' : ''}`} />
