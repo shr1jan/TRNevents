@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, lazy, Suspense } from 'react';
 import { Calendar, MapPin, Star, Shield, CreditCard, Search, Filter, Clock, ChevronLeft, ChevronRight, Heart, X } from 'lucide-react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,7 +10,7 @@ import { useAuth } from './hooks/useAuth';
 import { useEvents } from './hooks/useEvents';
 import TicketPurchase from './components/TicketPurchase';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Tickets from './pages/Tickets';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 type UserWithProfile = {
   email: string | null;
@@ -39,28 +39,62 @@ type Event = {
 import { EventsProvider } from './contexts/EventsContext';
 import { AuthProvider } from './contexts/AuthContextProvider';
 
+const Tickets = lazy(() => import('./pages/Tickets'));
+
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(): { hasError: boolean } {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+    console.error('ErrorBoundary caught an error', error, errorInfo);
+  }
+
+  render(): ReactNode {
+    if (this.state.hasError) {
+      return (
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-800">Something went wrong.</h1>
+            <p className="text-gray-600 mt-2">Please try refreshing the page or contact support if the issue persists.</p>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
 export default function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <EventsProvider>
-          <ToastContainer 
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            className="toast-container"
-          />
-          <AppContent />
-        </EventsProvider>
-      </AuthProvider>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <AuthProvider>
+          <EventsProvider>
+            <ToastContainer 
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              className="toast-container"
+            />
+            <AppContent />
+          </EventsProvider>
+        </AuthProvider>
+      </Router>
+    </ErrorBoundary>
   );
 }
 
@@ -651,7 +685,13 @@ function AppContent() {
             </div>
           </>
         } />
-        <Route path="/tickets" element={<Tickets />} />
+        <Route path="/tickets" element={
+          <Suspense fallback={<div className='flex justify-center items-center min-h-screen'>
+            <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500'></div>
+          </div>}>
+            <Tickets />
+          </Suspense>
+        } />
       </Routes>
 
       {/* Footer */}

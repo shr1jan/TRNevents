@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { AuthContext, AuthContextType } from '../contexts/AuthContextProvider';
 
 export function useAuth(): AuthContextType {
@@ -6,5 +6,7 @@ export function useAuth(): AuthContextType {
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
-  return context;
+
+  // Memoize the context to avoid unnecessary re-renders
+  return useMemo(() => context, [context]);
 }
