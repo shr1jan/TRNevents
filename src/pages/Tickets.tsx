@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
+import { supabase } from "../lib/supabase";
+import { useAuth } from '../hooks/useAuth'; // Assuming you have an auth hook
 
 type Ticket = {
   id: string;
@@ -20,13 +19,11 @@ const Tickets = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const auth = getAuth();
+  const { user } = useAuth(); // Use your auth hook instead of Firebase's getAuth
 
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const user = auth.currentUser;
-        
         if (!user) {
           navigate('/');
           return;
@@ -34,18 +31,16 @@ const Tickets = () => {
         
         setLoading(true);
         
-        const ticketsRef = collection(db, 'tickets');
-        const q = query(ticketsRef, where('userId', '==', user.uid));
-        const querySnapshot = await getDocs(q);
+        // Use Supabase query instead of Firebase
+        const { data, error: supabaseError } = await supabase
+          .from('tickets')
+          .select('*')
+          .eq('userId', user.id);
         
-        const ticketsList: Ticket[] = [];
-        querySnapshot.forEach((doc) => {
-          ticketsList.push({
-            id: doc.id,
-            ...doc.data() as Omit<Ticket, 'id'>
-          });
-        });
+        if (supabaseError) throw supabaseError;
         
+        // Transform the data if needed
+        const ticketsList: Ticket[] = data || [];
         setTickets(ticketsList);
       } catch (err) {
         console.error('Error fetching tickets:', err);
@@ -56,7 +51,7 @@ const Tickets = () => {
     };
     
     fetchTickets();
-  }, [navigate, auth]);
+  }, [navigate, user]);
 
   if (loading) {
     return (
