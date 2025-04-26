@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { MapPin, Facebook, Twitter, Linkedin } from 'lucide-react';
 
 const ContactSection = () => (
@@ -56,7 +56,7 @@ const NewsletterSection = () => (
   </div>
 );
 
-const Footer: React.FC = () => {
+const Footer: FC = () => {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
